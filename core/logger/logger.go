@@ -2,7 +2,8 @@ package logger
 
 import (
 	"context"
-	"github.com/tabi-core/core/middleware/logadapter"
+
+	"github.com/namhoai1109/tabi-core/core/middleware/logadapter"
 
 	"github.com/labstack/echo/v4"
 )

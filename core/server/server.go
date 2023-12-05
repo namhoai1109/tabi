@@ -3,12 +3,13 @@ package server
 import (
 	"context"
 	"fmt"
-	"github.com/tabi-core/core/middleware/logadapter"
-	"github.com/tabi-core/core/middleware/secure"
 	"net/http"
 	"os"
 	"os/signal"
 	"time"
+
+	"github.com/namhoai1109/tabi-core/core/middleware/logadapter"
+	"github.com/namhoai1109/tabi-core/core/middleware/secure"
 
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-lambda-go/lambda"

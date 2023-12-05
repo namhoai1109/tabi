@@ -3,9 +3,10 @@ package secure
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/tabi-core/core/logger"
-	"github.com/tabi-core/core/middleware/logadapter"
 	"strings"
+
+	"github.com/namhoai1109/tabi-core/core/logger"
+	"github.com/namhoai1109/tabi-core/core/middleware/logadapter"
 
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
