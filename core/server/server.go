@@ -8,8 +8,8 @@ import (
 	"os/signal"
 	"time"
 
-	"github.com/namhoai1109/tabi-core/core/middleware/logadapter"
-	"github.com/namhoai1109/tabi-core/core/middleware/secure"
+	"github.com/namhoai1109/tabi/core/middleware/logadapter"
+	"github.com/namhoai1109/tabi/core/middleware/secure"
 
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-lambda-go/lambda"

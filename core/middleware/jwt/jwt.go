@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/namhoai1109/tabi-core/core/server"
+	"github.com/namhoai1109/tabi/core/server"
 
 	"github.com/aws/aws-secretsmanager-caching-go/secretcache"
 	jwt "github.com/golang-jwt/jwt/v4"

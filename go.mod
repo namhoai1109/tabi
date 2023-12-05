@@ -1,4 +1,4 @@
-module github.com/namhoai1109/tabi-core
+module github.com/namhoai1109/tabi
 
 go 1.19
 

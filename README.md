@@ -1,3 +1,3 @@
-# github.com/namhoai1109/tabi-core
+# Tabi core
 
 Utility core for TABI project

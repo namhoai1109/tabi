@@ -7,8 +7,8 @@ import (
 	"strconv"
 	"strings"
 
-	dbcore "github.com/namhoai1109/tabi-core/core/db"
-	"github.com/namhoai1109/tabi-core/core/server"
+	dbcore "github.com/namhoai1109/tabi/core/db"
+	"github.com/namhoai1109/tabi/core/server"
 
 	"github.com/imdatngo/gowhere"
 	"github.com/labstack/echo/v4"
