@@ -3,6 +3,7 @@ package logadapter
 import (
 	"context"
 	"errors"
+	"fmt"
 	"regexp"
 	"strings"
 	"time"
@@ -24,6 +25,7 @@ type GormLogger struct {
 
 // NewGormLogger new gorm logger
 func NewGormLogger() *GormLogger {
+	l.SetFormatter(PrettyJSONFormat)
 	return &GormLogger{
 		SkipErrRecordNotFound: true,
 		Debug:                 true,
@@ -89,6 +91,7 @@ func (l *GormLogger) Trace(ctx context.Context, begin time.Time, fc func() (stri
 	}
 
 	if l.Debug {
+		fmt.Println("============ GORM log ===========")
 		l.Logger.WithContext(ctx).WithFields(fields).Debug()
 	}
 }
@@ -111,7 +114,7 @@ func sqlMask(sql string) string {
 	// Mask json fields
 	re := regexp.MustCompile(`\{.*\}`)
 	match := re.FindStringIndex(sql)
-	if match != nil && len(match) > 2 && match[len(match)-1]-match[0] > DefaultLargeFieldLength {
+	if len(match) > 2 && match[len(match)-1]-match[0] > DefaultLargeFieldLength {
 		sql = sql[:match[0]+50] + " ... " + sql[match[len(match)-1]-50:]
 	}
 

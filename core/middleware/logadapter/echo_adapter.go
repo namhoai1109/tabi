@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"context"
 	"encoding/json"
+	"fmt"
 	"io"
 	"regexp"
 	"strconv"
@@ -22,6 +23,7 @@ type EchoLogger struct {
 
 // NewEchoLogger return singleton logger
 func NewEchoLogger() *EchoLogger {
+	l.SetFormatter(PrettyJSONFormat)
 	return &EchoLogger{Logger: l}
 }
 
@@ -375,6 +377,7 @@ func LogWithEchoContext(c echo.Context, content ...interface{}) {
 		}
 	}
 
+	fmt.Println("========== context log ==========")
 	switch logType {
 	case LogTypeAPI:
 		if logger, ok := c.Logger().(*EchoLogger); ok {
@@ -471,6 +474,7 @@ func LogWithContext(ctx context.Context, content ...interface{}) {
 		}
 	}
 
+	fmt.Println("========== context log ==========")
 	switch logType {
 	case LogTypeAPI:
 		l.Logger.WithFields(logField).Info(content[0])
