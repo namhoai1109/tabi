@@ -25,7 +25,6 @@ type GormLogger struct {
 
 // NewGormLogger new gorm logger
 func NewGormLogger() *GormLogger {
-	l.SetFormatter(PrettyJSONFormat)
 	return &GormLogger{
 		SkipErrRecordNotFound: true,
 		Debug:                 true,

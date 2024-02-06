@@ -93,6 +93,7 @@ var l *Logger
 
 func init() {
 	l = New()
+	l.SetFormatter(PrettyJSONFormat)
 	sourceDir()
 }
 

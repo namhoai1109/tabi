@@ -23,7 +23,6 @@ type EchoLogger struct {
 
 // NewEchoLogger return singleton logger
 func NewEchoLogger() *EchoLogger {
-	l.SetFormatter(PrettyJSONFormat)
 	return &EchoLogger{Logger: l}
 }
 
