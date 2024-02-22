@@ -127,9 +127,11 @@ func (s *Service) Delete(ctx context.Context, params map[string]interface{}, url
 // BuildError to response error
 func (s *Service) BuildError(resp *resty.Response) error {
 	if resp.StatusCode() < http.StatusOK || resp.StatusCode() > http.StatusIMUsed {
-		error := new(ErrorResponseData)
-		json.Unmarshal(resp.Body(), &error)
-		return &error.Error
+		errResp := new(ErrorResponseData)
+		if err := json.Unmarshal(resp.Body(), &errResp); err != nil {
+			return err
+		}
+		return &errResp.Error
 	}
 	return nil
 }
