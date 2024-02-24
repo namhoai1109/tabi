@@ -16,6 +16,7 @@ type Config struct {
 	Duration     int // in seconds
 	Debug        bool
 	Timeout      int // in seconds
+	Region       string
 }
 
 // New creates new bnpl service
@@ -42,4 +43,7 @@ type Intf interface {
 	Put(ctx context.Context, params map[string]interface{}, url, path string, customAccessToken ...string) (*resty.Response, error)
 	Delete(ctx context.Context, params map[string]interface{}, url, path string, customAccessToken ...string) (*resty.Response, error)
 	BuildError(resp *resty.Response) error
+
+	InvokeLambda(ctx context.Context, functionName, path, method string, headers map[string]string, body map[string]interface{}) (*InvokeLambdaResponse, error)
+	GenerateAccessTokenByRole(id int, role string) (*string, error)
 }

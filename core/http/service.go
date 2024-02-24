@@ -16,7 +16,10 @@ type Request = resty.Request
 
 // Exported constanst
 const (
-	CorrelationIDKey key = "X-User-Correlation-Id"
+	CorrelationIDKey   key    = "X-User-Correlation-Id"
+	RepresentativeRole string = "REP"
+	BranchManagerRole  string = "BMA"
+	ClientRole         string = "CLI"
 )
 
 type (
@@ -110,7 +113,7 @@ func (c *Client[any]) GenerateAccessToken(duration time.Duration, customAccessTo
 		accessToken = customAccessToken[0]
 	} else {
 		claims := map[string]interface{}{
-			"role": "admin", // by default, role is admin
+			"role": RepresentativeRole, // by default, role is representative
 		}
 		expiredAt := time.Now().Add(time.Second * duration)
 		token, _, err := c.jwt.GenerateToken(claims, &expiredAt)
