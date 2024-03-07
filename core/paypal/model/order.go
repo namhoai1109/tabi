@@ -4,12 +4,14 @@ var (
 	OrderCurrencyUSD   = "USD"
 	OrderIntentCapture = "CAPTURE"
 
-	OrderStatusCreated   = "CREATED"
-	OrderStatusCompleted = "COMPLETED"
+	OrderStatusCreated             = "CREATED"
+	OrderStatusCompleted           = "COMPLETED"
+	OrderStatusPayerActionRequired = "PAYER_ACTION_REQUIRED"
 
-	OrderRelApprove = "approve"
-	OrderRelUpdate  = "update"
-	OrderRelSelf    = "self"
+	OrderRelApprove     = "approve"
+	OrderRelUpdate      = "update"
+	OrderRelSelf        = "self"
+	OrderRefPayerAction = "payer-action"
 )
 
 type UnitAmount struct {
@@ -47,6 +49,14 @@ type CreateOrderLinkResponse struct {
 type CreateOrderRequest struct {
 	Intent        string         `json:"intent"`
 	PurchaseUnits []PurchaseUnit `json:"purchase_units"`
+	PaymentSoure  struct {
+		Paypal struct {
+			ExperienceContext struct {
+				ReturnUrl string `json:"return_url"`
+				CancelUrl string `json:"cancel_url"`
+			} `json:"experience_context"`
+		} `json:"paypal"`
+	} `json:"payment_source"`
 }
 
 type CreateOrderResponse struct {
