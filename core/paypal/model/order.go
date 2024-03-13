@@ -6,6 +6,7 @@ var (
 
 	OrderStatusCreated             = "CREATED"
 	OrderStatusCompleted           = "COMPLETED"
+	OrderStatusApproved            = "APPROVED"
 	OrderStatusPayerActionRequired = "PAYER_ACTION_REQUIRED"
 
 	OrderRelApprove     = "approve"
@@ -49,7 +50,7 @@ type CreateOrderLinkResponse struct {
 type CreateOrderRequest struct {
 	Intent        string         `json:"intent"`
 	PurchaseUnits []PurchaseUnit `json:"purchase_units"`
-	PaymentSoure  struct {
+	PaymentSource struct {
 		Paypal struct {
 			ExperienceContext struct {
 				ReturnUrl string `json:"return_url"`
@@ -81,4 +82,9 @@ type CaptureOrderResponse struct {
 	Status string            `json:"status"`
 	Payer  CaptureOrderPayer `json:"payer"`
 	// to know more fields - ref: https://developer.paypal.com/docs/api/orders/v2/#orders_capture
+}
+
+type GetOrderDetailResponse struct {
+	ID     string `json:"id"`
+	Status string `json:"status"`
 }

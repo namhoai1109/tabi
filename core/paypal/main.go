@@ -123,6 +123,36 @@ func (s *Service) CaptureOrder(ctx context.Context, orderID string) (*model.Capt
 	return data, nil
 }
 
+func (s *Service) GetOrderDetails(ctx context.Context, orderID string) (*model.GetOrderDetailResponse, error) {
+	client, err := s.generatePaypalClient(ctx)
+	if err != nil {
+		return nil, err
+	}
+
+	path := CREATE_ORDER_PATH + "/" + orderID
+	logger.LogHTTPRequest(ctx, s.baseURL, path, resty.MethodGet, nil)
+	resp, err := client.R().
+		SetContext(ctx).
+		Get(path)
+	if err != nil {
+		logger.LogError(ctx, fmt.Sprintf("Error when request to capture order: %v", err))
+		return nil, err
+	}
+	logger.LogHTTPResponse(ctx, s.baseURL, path, resp.Body(), resp.StatusCode(), resp.Time())
+
+	if errResp := s.BuildError(resp); errResp != nil {
+		return nil, errResp
+	}
+
+	data := new(model.GetOrderDetailResponse)
+	if err := json.Unmarshal(resp.Body(), &data); err != nil {
+		logger.LogError(ctx, fmt.Sprintf("Error when unmarshal response: %v", err))
+		return nil, err
+	}
+
+	return data, nil
+}
+
 func (s *Service) BuildError(resp *resty.Response) *model.ErrorResponse {
 	if resp.StatusCode() < http.StatusOK || resp.StatusCode() > http.StatusIMUsed {
 		errResp := new(model.ErrorResponse)
