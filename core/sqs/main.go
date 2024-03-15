@@ -8,7 +8,7 @@ import (
 )
 
 // SendMessage to send SQS message
-func (s *Service) SendMessage(queueURL string, message string) (*sqs.SendMessageOutput, error) {
+func (s *Service) SendMessage(queueURL string, message map[string]interface{}) (*sqs.SendMessageOutput, error) {
 	// ! double json encode
 	jsonMsg, err := json.Marshal(message)
 	if err != nil {
