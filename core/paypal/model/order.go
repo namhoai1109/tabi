@@ -36,9 +36,14 @@ type PurchaseUnitAmount struct {
 	Breakdown    PurchaseUnitAmountBreakdown `json:"breakdown"`
 }
 
+type PurchaseUnitPayee struct {
+	EmailAddress string `json:"email_address"`
+}
+
 type PurchaseUnit struct {
 	Items  []PurchaseUnitItem `json:"items"`
 	Amount PurchaseUnitAmount `json:"amount"`
+	Payee  PurchaseUnitPayee  `json:"payee"`
 }
 
 type CreateOrderLinkResponse struct {
